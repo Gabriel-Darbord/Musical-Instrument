@@ -12,9 +12,14 @@ BaselineOfMusical >> baseline: spec [
 	spec for: #common do: [
 		spec
 			baseline: 'Phausto'
-			with: [ spec repository: 'github://lucretiomsp/phausto:main/src' ].
+			with: [ spec repository: 'github://lucretiomsp/phausto:main/src' ];
+			baseline: 'OpenTelemetry' with: [
+				spec repository:
+						'github://Gabriel-Darbord/opentelemetry-pharo:main/src' ].
 
-		spec package: 'Musical' with: [ spec requires: #( 'Phausto' ) ].
+		spec
+			package: 'Musical'
+			with: [ spec requires: #( 'Phausto' 'OpenTelemetry' ) ].
 
 		spec
 			group: 'core' with: #( 'Musical' );
