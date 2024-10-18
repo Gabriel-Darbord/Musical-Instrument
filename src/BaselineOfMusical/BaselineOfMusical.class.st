@@ -8,6 +8,7 @@ Class {
 { #category : 'baselines' }
 BaselineOfMusical >> baseline: spec [
 
+	<baseline>
 	spec for: #common do: [
 		spec
 			baseline: 'Phausto'
