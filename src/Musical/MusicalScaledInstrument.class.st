@@ -1,5 +1,5 @@
 Class {
-	#name : 'MusicalScaled',
+	#name : 'MusicalScaledInstrument',
 	#superclass : 'MusicalInstrument',
 	#classInstVars : [
 		'scale',
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : 'adding' }
-MusicalScaled class >> addOctaves: anInteger [
+MusicalScaledInstrument class >> addOctaves: anInteger [
 
 	| newScale scaleIndex |
 	newScale := Array new: scale size * (anInteger + 1).
@@ -29,25 +29,25 @@ MusicalScaled class >> addOctaves: anInteger [
 ]
 
 { #category : 'adding' }
-MusicalScaled class >> addToScale: aCollection [
+MusicalScaledInstrument class >> addToScale: aCollection [
 
 	scale := scale copyWithAll: aCollection
 ]
 
 { #category : 'accessing' }
-MusicalScaled class >> instrumentName [
+MusicalScaledInstrument class >> instrumentName [
 
 	self subclassResponsibility
 ]
 
 { #category : 'testing' }
-MusicalScaled class >> isAbstract [
+MusicalScaledInstrument class >> isAbstract [
 
-	^ self == MusicalScaled
+	^ self == MusicalScaledInstrument
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> play [
+MusicalScaledInstrument class >> play [
 
 	Dsp
 		playNote: (scale at: 1)
@@ -56,22 +56,22 @@ MusicalScaled class >> play [
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> play: anInstrumentName [
+MusicalScaledInstrument class >> play: anInstrumentName [
 
 	Dsp
 		playNote: (scale at: 1)
 		prefix: anInstrumentName
-		dur: 0.005 second
+		dur: 0.005 seconds
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> play: anInstrumentName ascending: aScale [
+MusicalScaledInstrument class >> play: anInstrumentName ascending: aScale [
 
 	self play: anInstrumentName ascending: aScale for: 0.005 second
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> play: anInstrumentName ascending: aScale for: aDuration [
+MusicalScaledInstrument class >> play: anInstrumentName ascending: aScale for: aDuration [
 
 	index := index ifNil: [ 1 ] ifNotNil: [
 		         index >= aScale size
@@ -84,7 +84,7 @@ MusicalScaled class >> play: anInstrumentName ascending: aScale for: aDuration [
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> play: anInstrumentName atRandom: aScale [
+MusicalScaledInstrument class >> play: anInstrumentName atRandom: aScale [
 
 	Dsp
 		playNote: (aScale at: (MusicalRandom nextInteger: aScale size))
@@ -93,7 +93,7 @@ MusicalScaled class >> play: anInstrumentName atRandom: aScale [
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> play: anInstrumentName atRandom: aScale for: aDuration [
+MusicalScaledInstrument class >> play: anInstrumentName atRandom: aScale for: aDuration [
 
 	Dsp
 		playNote: (aScale at: (MusicalRandom nextInteger: aScale size))
@@ -102,13 +102,13 @@ MusicalScaled class >> play: anInstrumentName atRandom: aScale for: aDuration [
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> play: anInstrumentName descending: aScale [
+MusicalScaledInstrument class >> play: anInstrumentName descending: aScale [
 
 	self play: anInstrumentName descending: aScale for: 0.005 second
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> play: anInstrumentName descending: aScale for: aDuration [
+MusicalScaledInstrument class >> play: anInstrumentName descending: aScale for: aDuration [
 
 	index := index ifNil: [ aScale size ] ifNotNil: [
 		         (index <= 1 or: [ index > aScale size ])
@@ -121,7 +121,7 @@ MusicalScaled class >> play: anInstrumentName descending: aScale for: aDuration 
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> play: anInstrumentName for: aDuration [
+MusicalScaledInstrument class >> play: anInstrumentName for: aDuration [
 
 	Dsp
 		playNote: (scale at: (MusicalRandom nextInteger: scale size))
@@ -130,7 +130,7 @@ MusicalScaled class >> play: anInstrumentName for: aDuration [
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> play: anInstrumentName onScale: aScale [
+MusicalScaledInstrument class >> play: anInstrumentName onScale: aScale [
 
 	Dsp
 		playNote: (aScale at: (MusicalRandom nextInteger: aScale size))
@@ -139,7 +139,7 @@ MusicalScaled class >> play: anInstrumentName onScale: aScale [
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> play: anInstrumentName onScale: aScale for: aDuration [
+MusicalScaledInstrument class >> play: anInstrumentName onScale: aScale for: aDuration [
 
 	Dsp
 		playNote: (aScale at: (MusicalRandom nextInteger: aScale size))
@@ -148,13 +148,13 @@ MusicalScaled class >> play: anInstrumentName onScale: aScale for: aDuration [
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> playAscending [
+MusicalScaledInstrument class >> playAscending [
 
 	self play: self instrumentName ascending: self scale
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> playAtRandom [
+MusicalScaledInstrument class >> playAtRandom [
 
 	Dsp
 		playNote: (scale at: (MusicalRandom nextInteger: scale size))
@@ -163,55 +163,58 @@ MusicalScaled class >> playAtRandom [
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> playAtRandom: aScale [
+MusicalScaledInstrument class >> playAtRandom: aScale [
 
 	self play: self instrumentName atRandom: aScale
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> playAtRandom: aScale for: aDuration [
+MusicalScaledInstrument class >> playAtRandom: aScale for: aDuration [
 
 	self play: self instrumentName atRandom: aScale for: aDuration
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> playDescending [
+MusicalScaledInstrument class >> playDescending [
 
 	self play: self instrumentName descending: self scale
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> playNote: anInteger [
+MusicalScaledInstrument class >> playNote: anInteger [
 
-	Dsp playNote: anInteger prefix: self instrumentName dur: 0.005
+	Dsp
+		playNote: anInteger
+		prefix: self instrumentName
+		dur: 5 milliSeconds
 ]
 
 { #category : 'playing' }
-MusicalScaled class >> playNote: anInteger for: aDuration [
+MusicalScaledInstrument class >> playNote: anInteger for: aDuration [
 
 	Dsp playNote: anInteger prefix: self instrumentName dur: aDuration
 ]
 
 { #category : 'accessing' }
-MusicalScaled class >> scale [
+MusicalScaledInstrument class >> scale [
 
 	^ scale ifNil: [ scale := MusicalScale cMajor ]
 ]
 
 { #category : 'accessing' }
-MusicalScaled class >> scale: anIntegerArray [
+MusicalScaledInstrument class >> scale: anIntegerArray [
 
 	scale := anIntegerArray
 ]
 
 { #category : 'transposition' }
-MusicalScaled class >> transposeScaleByOctaves: anInteger [
+MusicalScaledInstrument class >> transposeByOctaves: anInteger [
 
 	scale := MusicalScale transpose: scale byOctaves: anInteger
 ]
 
 { #category : 'transposition' }
-MusicalScaled class >> transposeScaleBySemitones: anInteger [
+MusicalScaledInstrument class >> transposeBySemitones: anInteger [
 
 	scale := MusicalScale transpose: scale bySemitones: anInteger
 ]

@@ -2,6 +2,7 @@ Extension { #name : 'Object' }
 
 { #category : '*Musical' }
 Object class >> playMusicalInstrument [
+	"Play a simple C4 note"
 
-	MusicalChordy playAscending
+	MusicalChordy playNote: 60
 ]

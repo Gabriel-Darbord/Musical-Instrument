@@ -26,8 +26,8 @@ OTMusicalInstrumentationModule class >> instrumentations [
 	"My subclasses must return the list of Instrumentations contained in the module."
 
 	^ {
-		  OTMusicalCollectionInstrumentation.
-		  OTMusicalGarbageCollectorInstrumentation }
+		  OTMusicalCollection.
+		  OTMusicalGarbageCollector }
 ]
 
 { #category : 'system startup' }

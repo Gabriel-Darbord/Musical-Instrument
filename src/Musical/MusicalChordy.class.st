@@ -1,6 +1,6 @@
 Class {
 	#name : 'MusicalChordy',
-	#superclass : 'MusicalScaled',
+	#superclass : 'MusicalScaledInstrument',
 	#category : 'Musical-Instruments',
 	#package : 'Musical',
 	#tag : 'Instruments'

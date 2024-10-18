@@ -3,5 +3,5 @@ Extension { #name : 'Collection' }
 { #category : '*Musical' }
 Collection class >> playMusicalInstrument [
 
-	MusicalTpSampler play
+	MusicalFm2Op playNote: 72
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : 'OTMusicalGarbageCollectorInstrumentation',
+	#name : 'OTMusicalGarbageCollector',
 	#superclass : 'OTMusicalInstrumentation',
 	#category : 'Musical-Instrumentation',
 	#package : 'Musical',
@@ -7,20 +7,20 @@ Class {
 }
 
 { #category : 'matching' }
-OTMusicalGarbageCollectorInstrumentation class >> classMatcher [
+OTMusicalGarbageCollector class >> classMatcher [
 
 	^ OTMatcher identicalTo: Behavior
 ]
 
 { #category : 'matching' }
-OTMusicalGarbageCollectorInstrumentation class >> methodMatcher [
+OTMusicalGarbageCollector class >> methodMatcher [
 	"runs when a global garbage collection happens, see `Behavior >> #handleFailingBasicNew`"
 
 	^ OTMatcher nameBeginsWith: 'handleFailing'
 ]
 
 { #category : 'matching' }
-OTMusicalGarbageCollectorInstrumentation class >> packageMatcher [
+OTMusicalGarbageCollector class >> packageMatcher [
 
 	^ OTMatcher identicalTo: Behavior package
 ]
