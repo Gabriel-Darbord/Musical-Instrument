@@ -6,3 +6,9 @@ Object class >> playMusicalInstrument [
 
 	MusicalChordy playNote: 60
 ]
+
+{ #category : '*Musical' }
+Object >> playMusicalInstrument [
+
+	self class playMusicalInstrument
+]

@@ -1,22 +1,19 @@
 Class {
 	#name : 'OTMusicalInstrumentation',
-	#superclass : 'OTInstrumentation',
+	#superclass : 'OTMethodProxyInstrumentation',
 	#category : 'Musical-Instrumentation',
 	#package : 'Musical',
 	#tag : 'Instrumentation'
 }
 
+{ #category : 'evaluating' }
+OTMusicalInstrumentation class >> beforeExecutionWithReceiver: receiver arguments: arguments [
+
+	receiver class playMusicalInstrument
+]
+
 { #category : 'testing' }
 OTMusicalInstrumentation class >> isAbstract [
 
 	^ self == OTMusicalInstrumentation
-]
-
-{ #category : 'instrumenting' }
-OTMusicalInstrumentation class >> onMethodEnter: event [
-	"The event contains the RFMethodOperation"
-
-	| operation |
-	operation := event at: 1.
-	operation method methodClass playMusicalInstrument
 ]

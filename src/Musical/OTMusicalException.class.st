@@ -6,6 +6,14 @@ Class {
 	#tag : 'Instrumentation'
 }
 
+{ #category : 'evaluating' }
+OTMusicalException class >> beforeExecutionWithReceiver: receiver arguments: arguments [
+	"on exception, not when debugging"
+
+	receiver exception class == OupsNullException ifFalse: [
+		receiver class playMusicalInstrument ]
+]
+
 { #category : 'matching' }
 OTMusicalException class >> classMatcher [
 
@@ -16,14 +24,4 @@ OTMusicalException class >> classMatcher [
 OTMusicalException class >> methodMatcher [
 
 	^ OTMatcher name: #submit
-]
-
-{ #category : 'instrumenting' }
-OTMusicalException class >> onMethodEnter: event [
-
-	| operation |
-	operation := event at: 1.
-	"on exception, not when debugging"
-	operation receiver exception class == OupsNullException ifFalse: [
-		operation method methodClass playMusicalInstrument ]
 ]
