@@ -1,6 +1,6 @@
 Class {
 	#name : 'MusicalScream',
-	#superclass : 'MusicalInstrument',
+	#superclass : 'MusicalTpSampler',
 	#category : 'Musical-Instruments',
 	#package : 'Musical',
 	#tag : 'Instruments'
@@ -12,17 +12,14 @@ MusicalScream class >> configure [
 	Dsp setValue: 0 parameter: 'ScreamIndex'
 ]
 
-{ #category : 'instance creation' }
-MusicalScream class >> instrument [
+{ #category : 'accessing' }
+MusicalScream class >> instrumentName [
 
-	^ TpSampler new
-		  name: 'Scream';
-		  pathToFolder: 'pharo-local/samples/scream';
-		  yourself
+	^ 'Scream'
 ]
 
-{ #category : 'playing' }
-MusicalScream class >> play [
+{ #category : 'instance creation' }
+MusicalScream class >> sampleFolder [
 
-	Dsp playNote: 60 prefix: 'Scream' dur: 0.5 second
+	^ 'pharo-local/samples/scream'
 ]

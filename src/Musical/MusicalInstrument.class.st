@@ -27,11 +27,18 @@ MusicalInstrument class >> destroy [
 { #category : 'class initialization' }
 MusicalInstrument class >> initialize [
 
-	SessionManager default registerUserClassNamed: self name
+	SessionManager default registerUserClassNamed: self name.
+	MusicalRandom := Random new
 ]
 
 { #category : 'instance creation' }
 MusicalInstrument class >> instrument [
+
+	self subclassResponsibility
+]
+
+{ #category : 'accessing' }
+MusicalInstrument class >> instrumentName [
 
 	self subclassResponsibility
 ]
@@ -53,7 +60,7 @@ MusicalInstrument class >> startUp: resuming [
 
 	| concreteSubclasses instruments |
 	resuming ifFalse: [ ^ self ].
-	self destroy.
+	self destroy. "to be sure DSP is destroyed, otherwise image will freeze"
 	concreteSubclasses := self allSubclasses reject: #isAbstract.
 	instruments := concreteSubclasses collect: #instrument.
 	Dsp := instruments sum stereo asDsp.

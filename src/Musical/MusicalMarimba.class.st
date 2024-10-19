@@ -18,8 +18,8 @@ MusicalMarimba class >> instrument [
 	^ Marimba new
 ]
 
-{ #category : 'playing' }
-MusicalMarimba class >> play [
+{ #category : 'accessing' }
+MusicalMarimba class >> instrumentName [
 
-	Dsp trig: 'MarimbaTrigger'
+	^ 'Marimba'
 ]

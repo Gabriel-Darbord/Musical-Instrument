@@ -14,7 +14,7 @@ Class {
 MusicalScaledInstrument class >> addOctaves: anInteger [
 
 	| newScale scaleIndex |
-	newScale := Array new: scale size * (anInteger + 1).
+	newScale := Array new: self scale size * (anInteger + 1).
 	scaleIndex := 0.
 	scale size timesRepeat: [
 		newScale
@@ -31,13 +31,7 @@ MusicalScaledInstrument class >> addOctaves: anInteger [
 { #category : 'adding' }
 MusicalScaledInstrument class >> addToScale: aCollection [
 
-	scale := scale copyWithAll: aCollection
-]
-
-{ #category : 'accessing' }
-MusicalScaledInstrument class >> instrumentName [
-
-	self subclassResponsibility
+	scale := self scale copyWithAll: aCollection
 ]
 
 { #category : 'testing' }
@@ -50,16 +44,16 @@ MusicalScaledInstrument class >> isAbstract [
 MusicalScaledInstrument class >> play [
 
 	Dsp
-		playNote: (scale at: 1)
+		playNote: (self scale at: 1)
 		prefix: self instrumentName
-		dur: 0.005 second
+		dur: 0.005 seconds
 ]
 
 { #category : 'playing' }
 MusicalScaledInstrument class >> play: anInstrumentName [
 
 	Dsp
-		playNote: (scale at: 1)
+		playNote: (self scale at: 1)
 		prefix: anInstrumentName
 		dur: 0.005 seconds
 ]
@@ -67,7 +61,7 @@ MusicalScaledInstrument class >> play: anInstrumentName [
 { #category : 'playing' }
 MusicalScaledInstrument class >> play: anInstrumentName ascending: aScale [
 
-	self play: anInstrumentName ascending: aScale for: 0.005 second
+	self play: anInstrumentName ascending: aScale for: 0.005 seconds
 ]
 
 { #category : 'playing' }
@@ -89,7 +83,7 @@ MusicalScaledInstrument class >> play: anInstrumentName atRandom: aScale [
 	Dsp
 		playNote: (aScale at: (MusicalRandom nextInteger: aScale size))
 		prefix: anInstrumentName
-		dur: 0.005 second
+		dur: 0.005 seconds
 ]
 
 { #category : 'playing' }
@@ -104,7 +98,7 @@ MusicalScaledInstrument class >> play: anInstrumentName atRandom: aScale for: aD
 { #category : 'playing' }
 MusicalScaledInstrument class >> play: anInstrumentName descending: aScale [
 
-	self play: anInstrumentName descending: aScale for: 0.005 second
+	self play: anInstrumentName descending: aScale for: 0.005 seconds
 ]
 
 { #category : 'playing' }
@@ -124,7 +118,7 @@ MusicalScaledInstrument class >> play: anInstrumentName descending: aScale for: 
 MusicalScaledInstrument class >> play: anInstrumentName for: aDuration [
 
 	Dsp
-		playNote: (scale at: (MusicalRandom nextInteger: scale size))
+		playNote: (scale at: (MusicalRandom nextInteger: self scale size))
 		prefix: anInstrumentName
 		dur: aDuration
 ]
@@ -135,7 +129,7 @@ MusicalScaledInstrument class >> play: anInstrumentName onScale: aScale [
 	Dsp
 		playNote: (aScale at: (MusicalRandom nextInteger: aScale size))
 		prefix: anInstrumentName
-		dur: 0.005 second
+		dur: 0.005 seconds
 ]
 
 { #category : 'playing' }
@@ -157,9 +151,9 @@ MusicalScaledInstrument class >> playAscending [
 MusicalScaledInstrument class >> playAtRandom [
 
 	Dsp
-		playNote: (scale at: (MusicalRandom nextInteger: scale size))
+		playNote: (scale at: (MusicalRandom nextInteger: self scale size))
 		prefix: self instrumentName
-		dur: 0.005 second
+		dur: 0.005 seconds
 ]
 
 { #category : 'playing' }
@@ -186,13 +180,22 @@ MusicalScaledInstrument class >> playNote: anInteger [
 	Dsp
 		playNote: anInteger
 		prefix: self instrumentName
-		dur: 5 milliSeconds
+		dur: 0.005 seconds
 ]
 
 { #category : 'playing' }
 MusicalScaledInstrument class >> playNote: anInteger for: aDuration [
 
 	Dsp playNote: anInteger prefix: self instrumentName dur: aDuration
+]
+
+{ #category : 'playing' }
+MusicalScaledInstrument class >> playOnScale: aScale [
+
+	Dsp
+		playNote: (aScale at: (MusicalRandom nextInteger: aScale size))
+		prefix: self instrumentName
+		dur: 0.005 seconds
 ]
 
 { #category : 'accessing' }
@@ -210,11 +213,11 @@ MusicalScaledInstrument class >> scale: anIntegerArray [
 { #category : 'transposition' }
 MusicalScaledInstrument class >> transposeByOctaves: anInteger [
 
-	scale := MusicalScale transpose: scale byOctaves: anInteger
+	scale := MusicalScale transpose: self scale byOctaves: anInteger
 ]
 
 { #category : 'transposition' }
 MusicalScaledInstrument class >> transposeBySemitones: anInteger [
 
-	scale := MusicalScale transpose: scale bySemitones: anInteger
+	scale := MusicalScale transpose: self scale bySemitones: anInteger
 ]
