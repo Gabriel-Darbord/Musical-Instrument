@@ -56,10 +56,18 @@ MusicalInstrument class >> play [
 ]
 
 { #category : 'system startup' }
+MusicalInstrument class >> shutDown: quitting [
+
+	quitting ifFalse: [ ^ self ].
+	OTMusicalInstrumentationModule uninstall
+]
+
+{ #category : 'system startup' }
 MusicalInstrument class >> startUp: resuming [
 
 	| concreteSubclasses instruments |
 	resuming ifFalse: [ ^ self ].
+	OTMusicalInstrumentationModule uninstall.
 	self destroy. "to be sure DSP is destroyed, otherwise image will freeze"
 	concreteSubclasses := self allSubclasses reject: #isAbstract.
 	instruments := concreteSubclasses collect: #instrument.
