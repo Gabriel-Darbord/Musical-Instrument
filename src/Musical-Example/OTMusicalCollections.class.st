@@ -1,6 +1,6 @@
 Class {
 	#name : 'OTMusicalCollections',
-	#superclass : 'AnObsoleteOTMethodProxyInstrumentation',
+	#superclass : 'OTMethodProxyInstrumentation',
 	#category : 'Musical-Example-Instrumentations',
 	#package : 'Musical-Example',
 	#tag : 'Instrumentations'
