@@ -1,6 +1,6 @@
 Extension { #name : 'OrderedCollection' }
 
-{ #category : '*Musical' }
+{ #category : '*Musical-Example' }
 OrderedCollection class >> playMusicalInstrument [
 
 	MusicalChordy play

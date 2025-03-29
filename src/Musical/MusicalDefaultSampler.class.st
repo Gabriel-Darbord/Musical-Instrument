@@ -14,6 +14,7 @@ MusicalDefaultSampler class >> instrumentName [
 
 { #category : 'instance creation' }
 MusicalDefaultSampler class >> sampleFolder [
+	"Looks for the samples/ folder in the current working directory."
 
-	^ 'pharo-local/samples/default'
+	^ 'samples'
 ]

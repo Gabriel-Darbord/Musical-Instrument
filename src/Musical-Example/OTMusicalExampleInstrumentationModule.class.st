@@ -1,8 +1,9 @@
 Class {
 	#name : 'OTMusicalExampleInstrumentationModule',
 	#superclass : 'OTMusicalInstrumentationModule',
-	#category : 'Musical-Example',
-	#package : 'Musical-Example'
+	#category : 'Musical-Example-InstrumentationModule',
+	#package : 'Musical-Example',
+	#tag : 'InstrumentationModule'
 }
 
 { #category : 'accessing' }
@@ -15,17 +16,21 @@ OTMusicalExampleInstrumentationModule class >> instrumentationName [
 OTMusicalExampleInstrumentationModule class >> instrumentations [
 
 	^ {
-		  OTMusicalCollection.
+		  "OTMusicalExceptions." "Uncomment when you set up a sample to play"
+		  OTMusicalCollections.
 		  OTMusicalGarbageCollector }
 ]
 
-{ #category : 'accessing' }
-OTMusicalExampleInstrumentationModule class >> musicalInstruments [
-	"List of instruments that must be created for this instrumentation to work."
+{ #category : 'examples' }
+OTMusicalExampleInstrumentationModule class >> start [
 
-	^ {
-		  MusicalMarimba.
-		  MusicalChordy.
-		  MusicalFm2Op.
-		  MusicalScream }
+	<example>
+	self enable
+]
+
+{ #category : 'examples' }
+OTMusicalExampleInstrumentationModule class >> stop [
+
+	<example>
+	self disable
 ]

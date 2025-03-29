@@ -1,14 +1,15 @@
 Class {
 	#name : 'OTMusicalGarbageCollector',
-	#superclass : 'OTMethodProxyInstrumentation',
-	#category : 'Musical-Example',
-	#package : 'Musical-Example'
+	#superclass : 'AnObsoleteOTMethodProxyInstrumentation',
+	#category : 'Musical-Example-Instrumentations',
+	#package : 'Musical-Example',
+	#tag : 'Instrumentations'
 }
 
 { #category : 'evaluating' }
 OTMusicalGarbageCollector class >> beforeExecutionWithReceiver: receiver arguments: arguments [
 
-	receiver class playMusicalInstrument
+	MusicalMarimba play
 ]
 
 { #category : 'matching' }
@@ -22,6 +23,13 @@ OTMusicalGarbageCollector class >> methodMatcher [
 	"Runs when a global garbage collection happens, see `Behavior >> #handleFailingBasicNew`"
 
 	^ OTMatcher nameBeginsWith: 'handleFailing'
+]
+
+{ #category : 'accessing' }
+OTMusicalGarbageCollector class >> musicalInstruments [
+	"List of instruments that must be created for this instrumentation to work."
+
+	^ { MusicalMarimba }
 ]
 
 { #category : 'matching' }

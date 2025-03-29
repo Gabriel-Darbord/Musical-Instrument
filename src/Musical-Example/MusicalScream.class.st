@@ -1,8 +1,8 @@
 Class {
 	#name : 'MusicalScream',
 	#superclass : 'MusicalTpSampler',
-	#category : 'Musical-Instruments',
-	#package : 'Musical',
+	#category : 'Musical-Example-Instruments',
+	#package : 'Musical-Example',
 	#tag : 'Instruments'
 }
 
@@ -20,6 +20,7 @@ MusicalScream class >> instrumentName [
 
 { #category : 'instance creation' }
 MusicalScream class >> sampleFolder [
+	"Will play the first file found in the ./ScreamSample/ folder."
 
-	^ 'pharo-local/samples/scream'
+	^ 'ScreamSample'
 ]

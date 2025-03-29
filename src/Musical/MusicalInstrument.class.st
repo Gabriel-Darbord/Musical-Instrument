@@ -37,6 +37,20 @@ MusicalInstrument class >> initialize [
 ]
 
 { #category : 'actions' }
+MusicalInstrument class >> initializeDSP: instruments [
+	"Avoid using sum: which can create the same instrument multiple times, messing up the parameter names."
+
+	| sample sum |
+	sample := instruments anyOne.
+	sum := sample instrument.
+	instruments do: [ :instrument |
+		instrument == sample ifFalse: [ sum := sum + instrument instrument ] ].
+
+	Dsp := sum stereo asDsp.
+	Dsp init start
+]
+
+{ #category : 'actions' }
 MusicalInstrument class >> install [
 	"Install all enabled musical instrumentation modules.
 	Ask them for their required instruments and initialize the DSP.
@@ -50,11 +64,9 @@ MusicalInstrument class >> install [
 		module enabled ifTrue: [
 			modules add: module.
 			instruments addAll: module musicalInstruments ] ].
-	instruments ifEmpty: [ ^ self ].
 
-	"Initialize the DSP object"
-	Dsp := (instruments sum: #instrument) stereo asDsp.
-	Dsp init start.
+	instruments ifEmpty: [ ^ self ].
+	self initializeDSP: instruments.
 
 	"Let the instruments configure the DSP, and then install the instrumentations."
 	instruments do: [ :instrument | instrument configure ].
@@ -97,15 +109,13 @@ MusicalInstrument class >> reinstall [
 { #category : 'system startup' }
 MusicalInstrument class >> shutDown: quitting [
 
-	quitting ifFalse: [ ^ self ].
-	OTMusicalExampleInstrumentationModule uninstall
+	quitting ifTrue: [ self uninstall ]
 ]
 
 { #category : 'system startup' }
 MusicalInstrument class >> startUp: resuming [
 
-	resuming ifFalse: [ ^ self ].
-	self reinstall
+	resuming ifTrue: [ self install ]
 ]
 
 { #category : 'actions' }
@@ -115,5 +125,5 @@ MusicalInstrument class >> uninstall [
 	<script>
 	OTMusicalInstrumentationModule allSubmodulesDo: [ :module | "Uninstall all modules, we don't know which ones were disabled since installation."
 		module uninstall ].
-	self destroy "Ensure DSP is destroyed, otherwise image will freeze"
+	self destroy "Ensure DSP is destroyed, otherwise image can freeze when starting another DSP"
 ]
