@@ -19,10 +19,13 @@ BaselineOfMusical >> baseline: spec [
 
 		spec
 			package: 'Musical'
-			with: [ spec requires: #( 'Phausto' 'OpenTelemetry' ) ].
+			with: [ spec requires: #( 'Phausto' 'OpenTelemetry' ) ];
+			package: 'Musical-Example' with: [ spec requires: #( 'Musical' ) ].
 
 		spec
 			group: 'core' with: #( 'Musical' );
 			group: 'tests' with: #(  );
-			group: 'default' with: #( 'core' 'tests' ) ]
+			group: 'examples' with: #( 'Musical-Example' );
+			group: 'default' with: #( 'core' 'tests' );
+			group: 'all' with: #( 'default' 'examples' ) ]
 ]

@@ -1,10 +1,15 @@
 Class {
 	#name : 'OTMusicalCollection',
-	#superclass : 'OTMusicalInstrumentation',
-	#category : 'Musical-Instrumentation',
-	#package : 'Musical',
-	#tag : 'Instrumentation'
+	#superclass : 'OTMethodProxyInstrumentation',
+	#category : 'Musical-Example',
+	#package : 'Musical-Example'
 }
+
+{ #category : 'evaluating' }
+OTMusicalCollection class >> beforeExecutionWithReceiver: receiver arguments: arguments [
+
+	receiver class playMusicalInstrument
+]
 
 { #category : 'matching' }
 OTMusicalCollection class >> classMatcher [
@@ -16,7 +21,6 @@ OTMusicalCollection class >> classMatcher [
 
 { #category : 'matching' }
 OTMusicalCollection class >> methodMatcher [
-	"My subclasses must define a matcher for the methods to instrument."
 
 	^ OTMatcher name: #do:
 ]

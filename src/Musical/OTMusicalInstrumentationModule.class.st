@@ -1,3 +1,7 @@
+"
+Subclass me to define a new instrumentation that can play sounds using Phausto.
+When I am enabled, `MusicalInstrument` will ask for the instruments I need to initialize in its DSP object.
+"
 Class {
 	#name : 'OTMusicalInstrumentationModule',
 	#superclass : 'OTInstrumentationModule',
@@ -6,37 +10,34 @@ Class {
 	#tag : 'Instrumentation'
 }
 
-{ #category : 'class initialization' }
-OTMusicalInstrumentationModule class >> initialize [
+{ #category : 'protocol' }
+OTMusicalInstrumentationModule class >> disable [
+	"Use on a concrete subclass of OTMusicalInstrumentationModule"
 
-	SessionManager default registerUserClassNamed: self name
+	<script>
+	self enabled: false.
+	MusicalInstrument reinstall
+]
+
+{ #category : 'protocol' }
+OTMusicalInstrumentationModule class >> enable [
+	"Use on a concrete subclass of OTMusicalInstrumentationModule"
+
+	<script>
+	self enabled: true.
+	MusicalInstrument reinstall
+]
+
+{ #category : 'testing' }
+OTMusicalInstrumentationModule class >> isAbstract [
+
+	^ self == OTMusicalInstrumentationModule
 ]
 
 { #category : 'accessing' }
-OTMusicalInstrumentationModule class >> instrumentationName [
-	"My subclasses must return a string with the name of the instrumentation module.
-	Ideally, the name should be the same as the library being instrumented.
-	It must be in lowercase, with words separated by hyphens."
+OTMusicalInstrumentationModule class >> musicalInstruments [
+	"List of instruments that must be created for this instrumentation to work.
+	By default, ask the instrumentations to supply their own requirements."
 
-	^ 'musical'
-]
-
-{ #category : 'accessing' }
-OTMusicalInstrumentationModule class >> instrumentations [
-	"My subclasses must return the list of Instrumentations contained in the module."
-
-	^ {
-		  OTMusicalCollection.
-		  OTMusicalGarbageCollector }
-]
-
-{ #category : 'system startup' }
-OTMusicalInstrumentationModule class >> shutDown: quitting [
-
-	quitting ifFalse: [ ^ self ].
-	self uninstall
-	"make sure this instrumentation is uninstalled on shut down
-	if a sensitive method is instrumented and an instrument is played on start up
-	before the DSP has been created, it can make an endless loop that kills the image
-	for example this happens when instrumenting Exception>>#signal:"
+	^ self instrumentations flatCollect: #musicalInstruments
 ]

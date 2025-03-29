@@ -1,10 +1,15 @@
 Class {
 	#name : 'OTMusicalGarbageCollector',
-	#superclass : 'OTMusicalInstrumentation',
-	#category : 'Musical-Instrumentation',
-	#package : 'Musical',
-	#tag : 'Instrumentation'
+	#superclass : 'OTMethodProxyInstrumentation',
+	#category : 'Musical-Example',
+	#package : 'Musical-Example'
 }
+
+{ #category : 'evaluating' }
+OTMusicalGarbageCollector class >> beforeExecutionWithReceiver: receiver arguments: arguments [
+
+	receiver class playMusicalInstrument
+]
 
 { #category : 'matching' }
 OTMusicalGarbageCollector class >> classMatcher [
@@ -14,7 +19,7 @@ OTMusicalGarbageCollector class >> classMatcher [
 
 { #category : 'matching' }
 OTMusicalGarbageCollector class >> methodMatcher [
-	"runs when a global garbage collection happens, see `Behavior >> #handleFailingBasicNew`"
+	"Runs when a global garbage collection happens, see `Behavior >> #handleFailingBasicNew`"
 
 	^ OTMatcher nameBeginsWith: 'handleFailing'
 ]

@@ -1,9 +1,8 @@
 Class {
 	#name : 'OTMusicalException',
-	#superclass : 'OTMusicalInstrumentation',
-	#category : 'Musical-Instrumentation',
-	#package : 'Musical',
-	#tag : 'Instrumentation'
+	#superclass : 'OTMethodProxyInstrumentation',
+	#category : 'Musical-Example',
+	#package : 'Musical-Example'
 }
 
 { #category : 'evaluating' }
@@ -24,4 +23,10 @@ OTMusicalException class >> classMatcher [
 OTMusicalException class >> methodMatcher [
 
 	^ OTMatcher name: #submit
+]
+
+{ #category : 'matching' }
+OTMusicalException class >> packageMatcher [
+
+	^ OTMatcher identicalTo: OupsDebugRequest package
 ]
