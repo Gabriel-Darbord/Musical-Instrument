@@ -28,6 +28,13 @@ OTMusicalInstrumentationModule class >> enable [
 	MusicalInstrument reinstall
 ]
 
+{ #category : 'accessing' }
+OTMusicalInstrumentationModule class >> instrumentationName [
+	"Only useful when exporting spans, otherwise no need to override"
+
+	^ 'musical'
+]
+
 { #category : 'testing' }
 OTMusicalInstrumentationModule class >> isAbstract [
 

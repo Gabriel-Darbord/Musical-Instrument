@@ -7,12 +7,6 @@ Class {
 }
 
 { #category : 'accessing' }
-OTMusicalExampleInstrumentationModule class >> instrumentationName [
-
-	^ 'musical-example'
-]
-
-{ #category : 'accessing' }
 OTMusicalExampleInstrumentationModule class >> instrumentations [
 
 	^ {
