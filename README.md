@@ -6,36 +6,44 @@ Code instrumentation using [OpenTelemetry-Pharo](https://github.com/Gabriel-Darb
 
 ## Installation
 
+As a standalone:
 ```st
 Metacello new
   githubUser: 'Gabriel-Darbord' project: 'Musical-Instrument' commitish: 'main' path: 'src';
   baseline: 'Musical';
+  onWarning: #resume;
   load
+```
+As a dependency:
+```st
+spec baseline: 'Musical' with: [ spec repository: 'github://Gabriel-Darbord/Musical-Instrument/src' ]
 ```
 
 Installing Phausto requires additional steps, see on its [wiki](https://github.com/lucretiomsp/phausto/wiki).
 
 ## Usage
 
-### Playing Instruments
+To define an instrumentation that automatically makes methods musical, three components are required:
 
-Concrete subclasses of `MusicalInstrument` each define an instrument that can play music using methods in the `playing` protocol.
-By default, the `playMusicalInstrument` message is sent to the class in which the instrumented method is installed.
-Re-implement this method to select which note or instrument is played by which class.
-
-### Instrumentation
-
-To define an instrumentation to make target methods become musical, subclass `OTMusicalInstrumentation`, and use the `OTMatcher` class-side API to implement:
-- `packageMatcher` (any by default)
-- `classMatcher` (any by default)
-- `methodMatcher`
-
-Redefine `onMethodEnter:` to add sampling, to decide when or what to play.
-The argument is an array containing an instance of the reified message send (`RFMethodOperation`) with the method, receiver, and arguments.
+| Component | Role | Implementation |
+|:---:|---|---|
+| `module` | Group `instrumentation`s together. | Subclass `OTMusicalInstrumentationModule` and implement the `instrumentations` method to return those to install when the module is enabled. |
+| `instrumentation` | Target methods and define the execution logic. | Subclass `OTMetaLinkInstrumentation` or `OTMethodProxyInstrumentation`, use the `OTMatcher` class-side API to implement `matching` methods, and use `instruments` to implement `evaluating` methods. |
+| `instrument` | Facade for handling Phausto's lifecycle and playing sounds. | Subclass `MusicalInstrument` and implement: <ul><li>`instrument`: returns a Phausto instrument instance.</li><li>`instrumentName`: the name of the instrument registered by Phausto.</li><li>`play`: a default way to play the instrument.</li></ul> |
 
 ## Examples
 
-Try some of the provided instrumentations:
-- **OTMusicalCollection** plays a note on `OrderedCollection >> #do:`
-- **OTMusicalException** plays a sound file on a debugger that opens due to an exception.
-- **OTMusicalGarbageCollector** plays a note when a global garbage collection happens.
+See the examples in the `Musical-Example` package, loaded with:
+```st
+Metacello new
+  githubUser: 'Gabriel-Darbord' project: 'Musical-Instrument' commitish: 'main' path: 'src';
+  baseline: 'Musical';
+  onWarning: #resume;
+  onConflictUseLoaded;
+  load: 'all'
+```
+
+It includes a module with three instrumentations:
+- `OTMusicalCollections` plays a note on different methods and classes of the Collection API.
+- `OTMusicalExceptions` plays a sound file when a debugger opens due to an exception.
+- `OTMusicalGarbageCollector` plays a note when a global garbage collection happens.
