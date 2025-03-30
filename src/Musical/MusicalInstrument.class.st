@@ -47,7 +47,10 @@ MusicalInstrument class >> initializeDSP: instruments [
 		instrument == sample ifFalse: [ sum := sum + instrument instrument ] ].
 
 	Dsp := sum stereo asDsp.
-	Dsp init start
+	Dsp init start.
+
+	"Hook to configure instruments with the initialized DSP"
+	instruments do: [ :instrument | instrument configure ]
 ]
 
 { #category : 'actions' }
@@ -66,10 +69,8 @@ MusicalInstrument class >> install [
 			instruments addAll: module musicalInstruments ] ].
 
 	instruments ifEmpty: [ ^ self ].
-	self initializeDSP: instruments.
 
-	"Let the instruments configure the DSP, and then install the instrumentations."
-	instruments do: [ :instrument | instrument configure ].
+	self initializeDSP: instruments.
 	modules do: [ :module | module install ]
 ]
 
