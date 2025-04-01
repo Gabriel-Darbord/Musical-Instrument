@@ -41,7 +41,7 @@ BaselineOfMusical >> baseline: spec [
 BaselineOfMusical >> copyLibraries [
 	"Copy the libraries from the Git folder to the image folder."
 
-	PSDGitBridge sourceDirectory / 'librariesBundle' copyTo:
+	MusicalGitBridge sourceDirectory / 'librariesBundle' copyTo:
 		(Smalltalk imagePath copyUpToLast: $/) asFileReference
 		/ 'librariesBundle'
 ]
